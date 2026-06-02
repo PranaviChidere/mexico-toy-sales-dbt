@@ -1,0 +1,18 @@
+# dbt
+target/
+dbt_packages/
+logs/
+.dbt/
+
+# DuckDB files (large binary — don't commit this)
+*.duckdb
+*.duckdb.wal
+
+# Python
+dbt-env/
+__pycache__/
+*.pyc
+.env
+
+# Data files (raw CSVs can be large)
+data/raw/
