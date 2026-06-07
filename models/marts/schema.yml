@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: mart_sales_summary
+    description: "Aggregated sales fact table. Primary source for Power BI."
+    columns:
+      - name: product_id
+        description: "Foreign key to products"
+        tests:
+          - not_null
+      - name: store_id
+        description: "Foreign key to stores"
+        tests:
+          - not_null
+      - name: total_revenue
+        description: "Units multiplied by product price"
+      - name: total_profit
+        description: "Total revenue minus total cost"
+
+  - name: mart_product_performance
+    description: "Product-level aggregation of revenue, profit and units sold."
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+
+  - name: mart_store_performance
+    description: "Store-level aggregation of revenue, profit and units sold."
+    columns:
+      - name: store_id
+        tests:
+          - unique
+          - not_null
+
+  - name: mart_inventory_health
+    description: "Inventory health with days of stock remaining and stockout risk flag."
+    columns:
+      - name: store_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null

@@ -16,3 +16,4 @@ __pycache__/
 
 # Data files (raw CSVs can be large)
 data/raw/
+dbt_internal_packages/

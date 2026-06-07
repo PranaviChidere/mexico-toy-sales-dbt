@@ -1,0 +1,88 @@
+version: 2
+
+models:
+  - name: int_sales_enriched
+    description: "Joins sales, products and stores. Calculates revenue, cost and profit per transaction."
+    columns:
+      - name: sale_id
+        description: "Unique sale identifier"
+        tests:
+          - not_null
+      - name: sale_date
+        description: "Date of the transaction"
+        tests:
+          - not_null
+      - name: store_id
+        description: "Foreign key to stores"
+        tests:
+          - not_null
+      - name: product_id
+        description: "Foreign key to products"
+        tests:
+          - not_null
+      - name: store_name
+        description: "Name of the store"
+      - name: store_city
+        description: "City where the store is located"
+      - name: store_location
+        description: "Location type - Downtown, Airport, Commercial, Residential"
+      - name: product_name
+        description: "Name of the product"
+      - name: product_category
+        description: "Category the product belongs to"
+      - name: product_cost_usd
+        description: "Cost per unit in USD"
+      - name: product_price_usd
+        description: "Selling price per unit in USD"
+      - name: unit_margin_usd
+        description: "Price minus cost per unit"
+      - name: units
+        description: "Number of units sold"
+        tests:
+          - not_null
+      - name: revenue
+        description: "Units multiplied by product price"
+        tests:
+          - not_null
+      - name: cost
+        description: "Units multiplied by product cost"
+        tests:
+          - not_null
+      - name: profit
+        description: "Units multiplied by unit margin"
+        tests:
+          - not_null
+
+  - name: int_inventory_vs_sales
+    description: "Combines inventory and sales to calculate days of stock remaining and stockout risk flag."
+    columns:
+      - name: store_id
+        description: "Foreign key to stores"
+        tests:
+          - not_null
+      - name: product_id
+        description: "Foreign key to products"
+        tests:
+          - not_null
+      - name: product_name
+        description: "Name of the product"
+      - name: product_category
+        description: "Category the product belongs to"
+      - name: product_cost_usd
+        description: "Cost per unit in USD"
+      - name: stock_on_hand
+        description: "Current units in stock"
+        tests:
+          - not_null
+      - name: inventory_value_usd
+        description: "Stock on hand multiplied by product cost"
+      - name: avg_daily_units_sold
+        description: "Average units sold per day for this product at this store"
+      - name: days_of_stock_remaining
+        description: "Stock on hand divided by average daily units sold"
+      - name: stock_status
+        description: "Healthy, At Risk, Out of Stock, or No Recent Sales"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Healthy', 'At Risk', 'Out of Stock', 'No Recent Sales']
