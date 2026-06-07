@@ -15,7 +15,10 @@ select
     sum(cost)                                           as total_cost,
     sum(profit)                                         as total_profit,
     round(sum(profit)/nullif(sum(revenue),0)*100, 2)    as profit_margin_pct,
-    count(distinct sale_date)                           as active_selling_days
+    count(distinct sale_date)                           as active_selling_days,
+    round(sum(revenue) / nullif(count(distinct sale_date), 0), 2)  as avg_daily_revenue,
+    round(sum(units) / nullif(count(distinct sale_date), 0), 2)    as avg_daily_units_sold,
+    round(sum(profit) / nullif(sum(units), 0), 2)                  as profit_per_unit
 
 from base
 group by
