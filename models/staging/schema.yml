@@ -9,7 +9,7 @@ sources:
       - name: products
         description: "Raw product catalog with cost and price as strings"
       - name: sales
-        description: "Raw sales transactions Jan 2017 to Oct 2018"
+        description: "Raw sales transactions Jan 2022 to Oct 2023"
       - name: stores
         description: "Raw store master data with open date as string"
       - name: inventory
